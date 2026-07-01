@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<title>Register</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{% static 'css/ui.css' %}">
+
+</head>
+
+<body>
+
+
+<div class="container">
+
+    <div class="card">
+
+            {% if messages %}
+    {% for message in messages %}
+             <div class="alert {{ message.tags }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+        <h1>Create Account</h1>
+        <p>Join us today</p>
+
+        <form method="post" enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+            <input type="text" placeholder="first name" name="first_name">
+            <input type="text" placeholder="last name" name="last_name">
+            <input type="email" placeholder="Email" name="email">
+            <input type="text" placeholder="username" name="username">
+            <input type="password" placeholder="Password" name="pass1">
+
+            <input type="password" placeholder="Confirm Password" name="pass2">
+
+            <button>Create Account</button>
+
+        </form>
+
+        <span>
+            Already have an account?
+            <a href="{% url 'Login' %}">Login</a>
+        </span>
+
+    </div>
+
+</div>
+
+</body>
+</html>

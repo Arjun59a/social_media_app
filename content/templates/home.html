@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | SocialApp</title>
+
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        <div class="logo">
+            SocialApp
+        </div>
+
+        <div class="nav-buttons">
+
+            <button class="profile-btn">
+                My Profile
+            </button>
+
+            <button class="logout-btn">
+                Logout
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="container">
+
+        <div class="feed">
+
+            <div class="create-post">
+                <a href="{% url 'home_app:Getpost' username %}"  >
+                   
+                    <button>
+                    + Create New Post
+                </button>
+
+            </a>
+                
+            </div>
+
+
+            <!-- Post Card -->
+            
+            {% for psts in data %}
+
+            <div class="post-card">
+
+                <div class="post-header">
+
+                    <div>
+                        <h3>{{psts.user}}</h3>
+                       
+                    </div>
+
+                </div>
+
+               
+                <img src="{{psts.image.url}}" alt="home" height="100" width="100"/>
+                <h2 class="post-title">
+                    {{psts.title}}
+                </h2>
+
+                <p class="post-description">
+
+                   {{psts.description}}
+
+                </p>
+
+
+                <div class="post-footer">
+                    <form action="{% url 'home_app:like' psts.id username %}" method="POST">
+                        {% csrf_token %}
+                        <button>
+                            {% if psts.likes == 0 %}
+                            ❤️ Like
+                            {% else %}
+                            ❤️{{psts.likes}}
+
+                            {% endif %}
+                        </button>
+                    </form>
+                    
+
+                    <button>💬 Comment</button>
+
+                </div>
+
+            </div>
+
+
+{% endfor %}
+         
+
+</body>
+
+</html>

@@ -1,0 +1,225 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    min-height:100vh;
+
+    background:linear-gradient(135deg,#0f172a,#1e1b4b,#312e81);
+
+    padding:40px;
+}
+
+/* Navbar */
+
+.navbar{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:40px;
+}
+
+.logo{
+
+    color:white;
+
+    font-size:30px;
+
+    font-weight:700;
+}
+
+.nav-buttons{
+
+    display:flex;
+
+    gap:15px;
+}
+
+.nav-buttons button{
+
+    padding:12px 22px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    color:white;
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(12px);
+
+    transition:.3s;
+}
+
+.nav-buttons button:hover{
+
+    transform:translateY(-2px);
+
+    background:#6366f1;
+}
+
+/* Feed */
+
+.container{
+
+    display:flex;
+
+    justify-content:center;
+}
+
+.feed{
+
+    width:700px;
+}
+
+/* Create Post */
+
+.create-post{
+
+    margin-bottom:30px;
+
+    display:flex;
+
+    justify-content:center;
+}
+
+.create-post button{
+
+    width:100%;
+
+    padding:18px;
+
+    border:none;
+
+    border-radius:18px;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    background:#6366f1;
+
+    color:white;
+
+    transition:.3s;
+}
+
+.create-post button:hover{
+
+    background:#4f46e5;
+}
+
+/* Card */
+
+.post-card{
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(15px);
+
+    border:1px solid rgba(255,255,255,.1);
+
+    border-radius:22px;
+
+    padding:25px;
+
+    margin-bottom:30px;
+
+    color:white;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+
+    transition:.3s;
+}
+
+.post-card:hover{
+
+    transform:translateY(-4px);
+}
+
+.post-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+}
+
+.post-header h3{
+
+    font-size:22px;
+}
+
+.post-header span{
+
+    color:#cbd5e1;
+
+    font-size:14px;
+}
+
+.post-title{
+
+    margin-bottom:15px;
+
+    color:#fff;
+}
+
+.post-description{
+
+    line-height:1.7;
+
+    color:#d1d5db;
+
+    margin-bottom:25px;
+}
+
+/* Footer */
+
+.post-footer{
+
+    display:flex;
+
+    gap:15px;
+}
+
+.post-footer button{
+
+    flex:1;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    color:white;
+
+    background:rgba(255,255,255,.12);
+
+    transition:.3s;
+}
+
+.post-footer button:hover{
+
+    background:#6366f1;
+}
