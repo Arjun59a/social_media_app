@@ -13,4 +13,9 @@ class Postlike(models.Model) :
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     title = models.ForeignKey(Post,on_delete=models.CASCADE)
     liked = models.BooleanField(default=False)
+
+class Profile(models.Model) :
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    profilepic = models.ImageField(upload_to="posts/",null=True)
+    bio = models.TextField(default='blank')
    

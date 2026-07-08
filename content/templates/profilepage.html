@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% if profile.profilepic %}
+        <img src="{{profile.profilepic.url}}" alt="Image havent uploaded"><br>
+        {% endif %}
+        <p>Upload Your image</p>
+        <input type="file" name="image">
+        <p>Bio :</p>
+        <textarea name="bio">{{profile.bio}}</textarea><br><br>
+        <h1>Username : {{username}}</h1>
+        <h3>User Posts</h3>
+       
+        <button type="submit">
+            Save profile
+        </button>
+         
+       
+        
+
+    </form>
+
+     {% for psts in posts %}
+        <img src="{{psts.image.url}}" alt="home" height="100" width="100"/>
+        <h2 class="post-title">{{psts.title}}</h2>
+        ❤️{{psts.likes}}
+        {% empty %}
+        <h4>Any post havent uploaded</h4>
+        {% endfor %}
+</body>
+</html>

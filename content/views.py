@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import Post,Postlike
+from .models import Post,Postlike,Profile
 from django.contrib.auth import get_user_model
 
 
@@ -63,6 +63,34 @@ def like_dislike(request,id,curruser) :
     post_details.save()
 
     return redirect(request.META.get("HTTP_REFERER", "/"))
+
+
+def profilepage(request,username) :
+    user_obj = User.objects.get_object_or_404(username=username)
+
+    curr_profile,created = Profile.get_or_create(user=user_obj)
+    if request.method == 'POST' :
+        imageurl = request.FILES.get('image')
+        bio = request.POST.get('bio')
+        print(imageurl)
+        print(bio)
+        curr_profile.profilepic=imageurl
+        curr_profile.bio=bio
+        curr_profile.save()
+        return redirect("home_app:home",username=username)
+    post_obj = Post.objects.filter(user=user_obj)
+    context = {
+        'posts' :post_obj,
+        'profile' :curr_profile,
+        'username' : username
+
+
+    }
+    return render(request,"profilepage.html",context=context)
+
+
+
+   
     
 
 
