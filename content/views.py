@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from .models import Post,Postlike,Profile
+from .models import Post,Postlike,Profile,follower_list
 from django.contrib.auth import get_user_model
 
 
@@ -66,9 +66,9 @@ def like_dislike(request,id,curruser) :
 
 
 def profilepage(request,username) :
-    user_obj = User.objects.get_object_or_404(username=username)
-
-    curr_profile,created = Profile.get_or_create(user=user_obj)
+    user_obj = get_object_or_404(User,username=username)
+    followerno = follower_list.objects.filter(following = user_obj).count()
+    curr_profile,created = Profile.objects.get_or_create(user=user_obj)
     if request.method == 'POST' :
         imageurl = request.FILES.get('image')
         bio = request.POST.get('bio')
@@ -82,12 +82,36 @@ def profilepage(request,username) :
     context = {
         'posts' :post_obj,
         'profile' :curr_profile,
-        'username' : username
+        'username' : username , 
+        'followers' : followerno
 
 
     }
     return render(request,"profilepage.html",context=context)
 
+
+def working_of_follow_button(request) :
+    username = request.session.get("username")
+    followeruser  = get_object_or_404(User,username=username)
+
+    if request.method == 'POST' :
+        user = request.POST['userid']
+        followinguser = get_object_or_404(User,username = user)
+        if followinguser != followeruser :
+            if not follower_list.objects.filter(follower = followeruser,following = followinguser).exists() :
+                follower_list.objects.create(
+                    follower = followeruser,
+                    following = followinguser
+                )
+            else :
+                obj = get_object_or_404(follower_list,follower = followeruser,following = followinguser)
+                obj.delete()
+            
+        return redirect(request.META.get("HTTP_REFERER", "/"))
+
+
+        
+    
 
 
    

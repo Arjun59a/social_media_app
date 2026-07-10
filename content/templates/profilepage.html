@@ -1,38 +1,62 @@
+{% load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 </head>
 <body>
-    <form method="post" enctype="multipart/form-data">
+    <div class="profile-card">
+
+    {% if profile.profilepic %}
+        <img class="profile-pic" src="{{profile.profilepic.url}}">
+    {% else %}
+        <div class="profile-pic placeholder">
+            👤
+        </div>
+    {% endif %}
+
+    <h2>{{username}}</h2>
+    <h2>followers : {{followers}}</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+
         {% csrf_token %}
-        {% if profile.profilepic %}
-        <img src="{{profile.profilepic.url}}" alt="Image havent uploaded"><br>
-        {% endif %}
-        <p>Upload Your image</p>
+
         <input type="file" name="image">
-        <p>Bio :</p>
-        <textarea name="bio">{{profile.bio}}</textarea><br><br>
-        <h1>Username : {{username}}</h1>
-        <h3>User Posts</h3>
-       
+
+        <textarea
+        name="bio"
+        placeholder="Write something about yourself...">{{profile.bio}}</textarea>
+
         <button type="submit">
-            Save profile
+            Save Profile
         </button>
-         
-       
-        
 
     </form>
 
-     {% for psts in posts %}
-        <img src="{{psts.image.url}}" alt="home" height="100" width="100"/>
-        <h2 class="post-title">{{psts.title}}</h2>
-        ❤️{{psts.likes}}
-        {% empty %}
-        <h4>Any post havent uploaded</h4>
-        {% endfor %}
+</div>
+
+<h2 class="heading">My Posts</h2>
+
+<div class="post-grid">
+
+{% for psts in posts %}
+
+<div class="post-box">
+
+    <img src="{{psts.image.url}}">
+
+</div>
+
+{% empty %}
+
+<h3>No posts yet.</h3>
+
+{% endfor %}
+
+</div>
 </body>
 </html>

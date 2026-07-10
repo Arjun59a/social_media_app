@@ -23,11 +23,11 @@
 
         <div class="nav-buttons">
             <a href="{% url 'home_app:profile' username %}">
-                 <button class="profile-btn">
-                My Profile
-            </button>
+                <button class="profile-btn">
+                    My Profile
+                </button>
             </a>
-           
+
 
             <button class="logout-btn">
                 Logout
@@ -37,25 +37,24 @@
     </div>
 
 
-    <di
-v class="container">
+    <di v class="container">
 
         <div class="feed">
 
             <div class="create-post">
-                <a href="{% url 'home_app:Getpost' username %}"  >
-                   
-                    <button>
-                    + Create New Post
-                </button>
+                <a href="{% url 'home_app:Getpost' username %}">
 
-            </a>
-                
+                    <button>
+                        + Create New Post
+                    </button>
+
+                </a>
+
             </div>
 
 
             <!-- Post Card -->
-            
+
             {% for psts in data %}
 
             <div class="post-card">
@@ -64,20 +63,26 @@ v class="container">
 
                     <div>
                         <h3>{{psts.user}}</h3>
-                       
+                        <form action="{% url 'home_app:flwbuttn' %} " method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <button type="submit"name="userid" value="{{ psts.user.username }}">Follow</button>
+                        </form>
+
                     </div>
 
                 </div>
 
-               
-                <img src="{{psts.image.url}}" alt="home" height="100" width="100"/>
+
+
+
+                <img src="{{psts.image.url}}" alt="home" height="100" width="100" />
                 <h2 class="post-title">
                     {{psts.title}}
                 </h2>
 
                 <p class="post-description">
 
-                   {{psts.description}}
+                    {{psts.description}}
 
                 </p>
 
@@ -94,7 +99,7 @@ v class="container">
                             {% endif %}
                         </button>
                     </form>
-                    
+
 
                     <button>💬 Comment</button>
 
@@ -103,8 +108,8 @@ v class="container">
             </div>
 
 
-{% endfor %}
-         
+            {% endfor %}
+
 
 </body>
 

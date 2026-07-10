@@ -51,6 +51,7 @@ def login(request) :
             is_valid = check_password(passwaord1,userspassword)
 
             if is_valid :
+                request.session["username"] = user.username
                 return redirect("home_app:home",username=user.username)
         
         else :
