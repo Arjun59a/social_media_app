@@ -67,7 +67,8 @@ def like_dislike(request,id,curruser) :
 
 def profilepage(request,username) :
     user_obj = get_object_or_404(User,username=username)
-    followerno = follower_list.objects.filter(following = user_obj).count()
+    followerno = follower_list.objects.filter(following = user_obj)
+    followingno = follower_list.objects.filter(follower = user_obj)
     curr_profile,created = Profile.objects.get_or_create(user=user_obj)
     if request.method == 'POST' :
         imageurl = request.FILES.get('image')
@@ -83,7 +84,10 @@ def profilepage(request,username) :
         'posts' :post_obj,
         'profile' :curr_profile,
         'username' : username , 
-        'followers' : followerno
+        'followers' : followerno.count(),
+        'follower_obj' : followerno , 
+        'following' : followingno.count(),
+        'following_obj' : followingno
 
 
     }
@@ -108,6 +112,10 @@ def working_of_follow_button(request) :
                 obj.delete()
             
         return redirect(request.META.get("HTTP_REFERER", "/"))
+    
+
+def getting_follower_page(request) :
+    pass
 
 
         

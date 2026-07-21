@@ -1,37 +1,59 @@
-{% load static%}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Profile</title>
+
     <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 </head>
 <body>
-    <div class="profile-card">
+
+<div class="profile-card">
 
     {% if profile.profilepic %}
-        <img class="profile-pic" src="{{profile.profilepic.url}}">
+        <img class="profile-pic" src="{{ profile.profilepic.url }}">
     {% else %}
         <div class="profile-pic placeholder">
             👤
         </div>
     {% endif %}
 
-    <h2>{{username}}</h2>
-    <h2>followers : {{followers}}</h2>
+    <h2>{{ username }}</h2>
 
+    <!-- Followers & Following -->
+    <form method="POST">
+        {% csrf_token %}
+
+        <button class="connection-btn"
+                type="submit"
+                name="type"
+                value="followers">
+            Followers
+        </button>
+
+        <button class="connection-btn"
+                type="submit"
+                name="type"
+                value="following">
+            Following
+        </button>
+    </form>
+
+    <br>
+
+    <!-- Profile Update Form -->
     <form method="POST" enctype="multipart/form-data">
-
         {% csrf_token %}
 
         <input type="file" name="image">
 
         <textarea
-        name="bio"
-        placeholder="Write something about yourself...">{{profile.bio}}</textarea>
+            name="bio"
+            placeholder="Write something about yourself...">{{ profile.bio }}</textarea>
 
-        <button type="submit">
+        <button class="save-btn" type="submit">
             Save Profile
         </button>
 
@@ -46,17 +68,16 @@
 {% for psts in posts %}
 
 <div class="post-box">
-
-    <img src="{{psts.image.url}}">
-
+    <img src="{{ psts.image.url }}">
 </div>
 
 {% empty %}
 
-<h3>No posts yet.</h3>
+<h3 style="text-align:center;">No posts yet.</h3>
 
 {% endfor %}
 
 </div>
+
 </body>
 </html>
