@@ -23,19 +23,19 @@
     <h2>{{ username }}</h2>
 
     <!-- Followers & Following -->
-    <form method="POST">
+    <form action="{% url 'home_app:f_f' username %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
-        <button class="connection-btn"
+         <button class="connection-btn"
                 type="submit"
-                name="type"
+                name="type1"
                 value="followers">
-            Followers
+           Followers
         </button>
 
         <button class="connection-btn"
                 type="submit"
-                name="type"
+                name="type1"
                 value="following">
             Following
         </button>
@@ -70,7 +70,10 @@
 <div class="post-box">
     <img src="{{ psts.image.url }}">
 </div>
-
+<form action="{% url 'home_app:delete' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <button name="postid" value="{{psts.id}}" >Delete</button>
+</form>
 {% empty %}
 
 <h3 style="text-align:center;">No posts yet.</h3>

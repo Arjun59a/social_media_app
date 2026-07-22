@@ -23,4 +23,11 @@ class follower_list(models.Model):
     follower = models.ForeignKey(User,on_delete=models.CASCADE,related_name="user_follower")
     following = models.ForeignKey(User,on_delete=models.CASCADE,related_name="user_following")
 
+
+class Commentsection(models.Model) : 
+    whocomment = models.ForeignKey(User,on_delete=models.CASCADE,related_name="commenter")
+    onwhichpost = models.ForeignKey(Post,on_delete=models.CASCADE,related_name="postname")
+    comment = models.TextField()
+
+
    

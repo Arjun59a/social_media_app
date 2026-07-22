@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Following</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/following.css' %}?v=3">
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Following</h2>
+
+    {% for i in followings_obj %}
+
+    <div class="user-card">
+
+        <div class="profile">
+
+            {% if i.following.profile.profilepic %}
+                <img src="{{ i.following.profile.profilepic.url }}">
+            {% else %}
+                <img src="{% static 'images/default.png' %}">
+            {% endif %}
+
+        </div>
+
+        <div class="details">
+            <h3>{{ i.following.username }}</h3>
+        </div>
+
+        <div class="btn">
+            
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <p class="empty">You are not following anyone.</p>
+
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

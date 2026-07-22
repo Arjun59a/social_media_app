@@ -100,8 +100,10 @@
                         </button>
                     </form>
 
-
+                    <form action="{% url 'home_app:comment' psts.id %}" method="POST">
+                        {% csrf_token %}
                     <button>💬 Comment</button>
+                    </form>
 
                 </div>
 

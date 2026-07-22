@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Followers</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/followers.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Your Followers</h2>
+
+    {% for f in followers_obj %}
+
+    <div class="user-card">
+
+        <div class="profile">
+
+            {% if f.follower.profile.profilepic %}
+                <img src="{{ f.follower.profile.profilepic.url }}">
+            {% else %}
+                <div class="profile-pic placeholder">
+                    👤
+                </div>
+            {% endif %}
+
+        </div>
+
+        <div class="details">
+            <h3>{{ f.follower.username }}</h3>
+        </div>
+
+        <div class="btn">
+           
+                <button
+                    name="userid"
+                    value="{{ f.follower.username }},{{ f.following.username }}">
+                    Remove
+                </button>
+           
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <p class="empty">No followers yet.</p>
+
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

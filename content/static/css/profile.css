@@ -7,7 +7,7 @@
 
 body{
     min-height:100vh;
-    background:red;
+    background:linear-gradient(135deg,#0f172a,#1e1b4b,#312e81);
     color:white;
     padding:40px;
 }
@@ -159,6 +159,3 @@ body{
     object-fit:cover;
 }
 
-body{
-    background:red !important;
-}

@@ -1,0 +1,106 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#0f172a,#1e1b4b,#312e81);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding:50px;
+}
+
+.container{
+    width:650px;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:22px;
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+    overflow:hidden;
+}
+
+.container h2{
+    text-align:center;
+    padding:22px;
+    font-size:30px;
+    border-bottom:1px solid rgba(255,255,255,.12);
+}
+
+.user-card{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 25px;
+    transition:.3s;
+}
+
+.user-card:hover{
+    background:rgba(255,255,255,.05);
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.profile img,
+.profile-pic{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+}
+
+.profile img{
+    object-fit:cover;
+    border:3px solid #6366f1;
+}
+
+.placeholder{
+    background:rgba(255,255,255,.08);
+    border:3px solid #6366f1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:32px;
+}
+
+.details{
+    flex:1;
+    margin-left:20px;
+}
+
+.details h3{
+    color:white;
+    font-size:19px;
+    font-weight:600;
+}
+
+.btn button{
+    padding:12px 22px;
+    border:none;
+    border-radius:12px;
+    background:#ef4444;
+    color:white;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:600;
+    transition:.3s;
+}
+
+.btn button:hover{
+    background:#dc2626;
+    transform:translateY(-2px);
+}
+
+.empty{
+    text-align:center;
+    padding:40px;
+    color:#cbd5e1;
+}
