@@ -22,12 +22,12 @@
         </div>
 
         <div class="nav-buttons">
+
             <a href="{% url 'home_app:profile' username %}">
                 <button class="profile-btn">
                     My Profile
                 </button>
             </a>
-
 
             <button class="logout-btn">
                 Logout
@@ -37,19 +37,16 @@
     </div>
 
 
-    <di v class="container">
+    <div class="container">
 
         <div class="feed">
 
             <div class="create-post">
                 <a href="{% url 'home_app:Getpost' username %}">
-
                     <button>
                         + Create New Post
                     </button>
-
                 </a>
-
             </div>
 
 
@@ -63,29 +60,23 @@
 
                     <div>
                         <h3>{{psts.user}}</h3>
-                        <form action="{% url 'home_app:flwbuttn' %} " method="post" enctype="multipart/form-data">
+                        <form action="{% url 'home_app:flwbuttn' %}" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <button type="submit"name="userid" value="{{ psts.user.username }}">Follow</button>
+                            <button type="submit" name="userid" value="{{ psts.user.username }}">Follow</button>
                         </form>
-
                     </div>
 
                 </div>
 
+                <img src="{{psts.image.url}}" alt="home" />
 
-
-
-                <img src="{{psts.image.url}}" alt="home" height="100" width="100" />
                 <h2 class="post-title">
                     {{psts.title}}
                 </h2>
 
                 <p class="post-description">
-
                     {{psts.description}}
-
                 </p>
-
 
                 <div class="post-footer">
                     <form action="{% url 'home_app:like' psts.id username %}" method="POST">
@@ -94,25 +85,59 @@
                             {% if psts.likes == 0 %}
                             ❤️ Like
                             {% else %}
-                            ❤️{{psts.likes}}
-
+                            ❤️ {{psts.likes}}
                             {% endif %}
                         </button>
                     </form>
 
-                    <form action="{% url 'home_app:comment' psts.id %}" method="POST">
+                    <button name="post_comments" type="button" onclick="hidding_showing('{{psts.id}}')">
+                        💬 Comment
+                    </button>
+                </div>
+
+                <div id="comment-{{psts.id}}" class="comment-box" style="display:none;">
+
+                    <div class="comment-list">
+                        {% for cmt in psts.postname.all %}
+                        <div class="single-comment">
+                            <strong>{{cmt.whocomment}}</strong>
+                            <p>{{cmt.comment}}</p>
+                        </div>
+                        {% empty %}
+                        <p class="no-comment">
+                            No comments yet.
+                        </p>
+                        {% endfor %}
+                    </div>
+
+                    <form action="{% url 'home_app:addcomment' psts.id %}" method="post" class="comment-form">
                         {% csrf_token %}
-                    <button>💬 Comment</button>
+                        <textarea name="comment" placeholder="Write a comment..." required></textarea>
+                        <button type="submit">
+                            Post Comment
+                        </button>
                     </form>
 
                 </div>
 
             </div>
 
-
             {% endfor %}
 
+        </div>
+
+    </div>
+
+    <script>
+        function hidding_showing(id) {
+            var obj = document.getElementById("comment-" + id);
+            if (obj.style.display == 'none') {
+                obj.style.display = 'block';
+            } else {
+                obj.style.display = 'none';
+            }
+        }
+    </script>
 
 </body>
-
 </html>

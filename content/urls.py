@@ -10,6 +10,7 @@ urlpatterns = [
     path("followers_following/<str:username>",views.getting_follower_page,name="f_f"),
     path("rmove",views.removinguser,name="remove"),
     path("deletepost",views.deleting_from_profilepage,name="delete"),
-    path("getcomment/<int:postid>",views.getting_comments,name="comment"),
-    path("addcommt/<int:postid>",views.adding_comments,name="addcommt")
+    path("getcomment/<int:postid>/<str:username>",views.getting_comments,name="comment"),
+    path("addcomment/<int:postid>",views.adding_comments,name="addcomment")
+    
 ]

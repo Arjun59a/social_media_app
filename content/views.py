@@ -19,17 +19,12 @@ def getting_content(request,username) :
             description = Discription
         )
 
-        return redirect("home_app:home",username=username)
-
-
-
-       
-
-   
+        return redirect("home_app:home",username=username)     
     return render(request,"addpost.html",{'username':username})
 
 def homepage(request,username) :
-    dt = Post.objects.all()
+    dt = dt = Post.objects.all().prefetch_related("postname")
+   
     context = {
         'data': dt,
         'username': username  
@@ -164,18 +159,21 @@ def deleting_from_profilepage(request) :
         return redirect(request.META.get("HTTP_REFERER", "/"))
 
    
-def getting_comments(request,postid) :
+def getting_comments(request,postid,username) :
     post_obj = get_object_or_404(Post,id=postid)
     commt_obj = Commentsection.objects.filter(onwhichpost=post_obj)
+    
     context = {
 
         'commt_obj' : commt_obj,
-        'postid' : postid
+        'postid' : postid,
+        'username':username
+        
     }
 
-    return render(request,'comments.html',context=context)
+    return render(request,'home.html',context=context)
 
-def adding_comments(request,postid) : 
+def adding_comments(request,postid) :    
     username = request.session.get("username")
     user = get_object_or_404(User,username=username)
     post = get_object_or_404(Post,id=postid)
@@ -187,8 +185,9 @@ def adding_comments(request,postid) :
         comment = comment_text
         )
 
+
         
-    return redirect("home_app:comment",postid=postid)
+    return redirect(request.META.get("HTTP_REFERER", "/"))
 
 
 
